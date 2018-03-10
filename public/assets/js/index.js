@@ -1,30 +1,28 @@
+console.log('loaded');
 $(function() {
-    $('.add-burger').on('submit', function(event) {
+    $('#add-burger').on('click', function(event) {
         event.preventDefault();
-
+        console.log('got here');
         let newBurg = {
             burger_name: $('#burg').val().trim()
         };
         console.log(newBurg);
-
-        $.ajax('/api/burgers', {
-            type: 'POST',
-            data: newBurg
-        }).then(function() {
+        
+        $.post('/api/burgers', newBurg)
+        .then(function() {
             console.log('new burger');
             location.reload();
         });
     });
-
+    
     $('.devour').on('click', function(event) {
         let id = $(this).data('id');
-
+        
         let state = {
             devoured: true
         };
-
-        $.ajax('/api/burgers/' + id, {
-            type: 'PUT',
+        
+        $.put('/api/burgers/' + id, {
             data: state
         }).then(function() {
             console.log('changed devoured to', state);

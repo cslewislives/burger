@@ -9,7 +9,10 @@ var orm = {
         });
     },
     insertOne: function(table, column, value, cb) {
-        let query = 'INSERT INTO ' + table + ' (' + column + ') VALUE (' + value + ');';
+        let query = 'INSERT INTO ' + table + ' (' + column + ') VALUE ("' + value + '");';
+        //query = 'INSERT INTO ? SET ?' [tableName, valuesObject]
+        //{column1: val1, column2: val2}
+        //column1 = val1, column2 = val2
         con.query(query, value, function(err, result) {
             if (err) throw err;
             console.log('here');
