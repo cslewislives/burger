@@ -17,13 +17,17 @@ $(function() {
     
     $('.devour').on('click', function(event) {
         let id = $(this).data('id');
-        
-        let state = {
-            devoured: true
+        let state = $(this).data('devoured');
+         state = "true";
+        console.log(state);
+        let newState = {
+            devoured: state
         };
         
-        $.put('/api/burgers/' + id, {
-            data: state
+        $.ajax({
+            url: '/api/burgers/' + id,
+            type: 'PUT',
+            data: newState
         }).then(function() {
             console.log('changed devoured to', state);
             location.reload();

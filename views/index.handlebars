@@ -3,16 +3,24 @@
 
 <h3>Which Burger will you eat?</h3>
 
+<h4>Available Burgers</h4>
 <ul>
     {{#each burgers}}
-        <li>
-            {{burger_name}}
-
-            <button class="devour" data-id="{{id}}">{{#unless devoured}} DEVOUR{{else}}All Gone! {{/unless}}
-            </button>
-        </li>
+        {{#unless devoured}}
+            {{> burgers/burger devoured=false}}
+        {{/unless}}
     {{/each}}
 </ul>
+
+<h4>Devoured Burgers</h4>
+<ul>
+    {{#each burgers}}
+        {{#if devoured}}
+            {{> burgers/burger devoured=true}}
+        {{/if}}
+    {{/each}}
+</ul>
+
 
 <h4>Add a Burger!</h4>
 
